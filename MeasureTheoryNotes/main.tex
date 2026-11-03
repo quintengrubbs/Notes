@@ -13,28 +13,13 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
 \usepackage{csquotes}
-\usepackage[backend=biber]{biblatex}
 \usepackage{enumitem}
-\usepackage[shortlabels]{enumitem}
 \usepackage{tikz}
-\addbibresource{references.bib}
 \colorlet{LightGray}{White!90!Periwinkle}
 \colorlet{LightOrange}{Orange!15}
 \colorlet{LightGreen}{Green!15}
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
-
-\declaretheoremstyle[name=Theorem,]{thmsty}
-\declaretheorem[style=thmsty,numberwithin=section]{theorem}
-\tcolorboxenvironment{theorem}{colback=LightGray}
-
-\declaretheoremstyle[name=Proposition,]{prosty}
-\declaretheorem[style=prosty,numberlike=theorem]{proposition}
-\tcolorboxenvironment{proposition}{colback=LightOrange}
-
-\declaretheoremstyle[name=Principle,]{prcpsty}
-\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
-\tcolorboxenvironment{principle}{colback=LightGreen}
 
 \setstretch{1.2}
 \geometry{
