@@ -1,0 +1,115 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{csquotes}
+\usepackage[backend=biber]{biblatex}
+\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
+\usepackage{tikz}
+\addbibresource{references.bib}
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+		\HRule{1.5pt} \\
+		\LARGE \textbf{\uppercase{Notes on Measure Theory by Cohn}
+		\HRule{2.0pt} \\ [0.6cm] \LARGE{} \vspace*{10\baselineskip}}
+		}
+\date{}
+\author{\textbf{Quinten Grubbs} \\ 
+		University of Missouri-St. Louis \\
+		December 15 2025}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\section{Measures}
+\subsection{Algebras and Sigma-Algebras}
+\textbf{Definition: } Let \(X\) be an arbitrary set. A collection \(\mathcal{A}\) of subsets of \(X\) is an \textit{algebra} on \(X\) if
+\begin{enumerate}
+    \item \(X\in\mathcal{A}\)
+    \item for each set \(A\) that belongs to \(\mathcal{A}\), the set \(A^c\in \mathcal{A}\)
+    \item for each finite sequence \(A_1,...,A_n\) of sets that belong to \(\mathcal{A}\), the set \(\cup^n_{i=1} A_i\) belongs to \(\mathcal{A}\)
+    \item for each finite sequence \(A_1,...,A_n\) of sets that belong to \(\mathcal{A}\), the set \(\cap^n_{i=1}A_i\) belongs to \(\mathcal{A}\)
+\end{enumerate}
+
+We now define something similar called a \(\sigma\)-algebra if:\\
+\begin{enumerate}
+    \item \(X\in\mathcal{A}\)
+    \item for each set \(A\) that belongs to \(\mathcal{A}\), the set \(A^c\) belongs to \(\mathcal{A}\)
+    \item for each infinite sequence \(\{A_i\}\) of sets that belong to \(\mathcal{A}\), the set \(\cup_{i=1}^\infty A_i\) belongs to \(\mathcal{A}\)
+    \item for each infinite sequence \(\{A_i\}\) of sets that belong to \(\mathcal{A}\), the set \(\cap_{i=1}^\infty A_i\) belongs to \(\mathcal{A}\)
+\end{enumerate}
+
+\begin{itemize}
+    \item If \(X\) is a set and \(\mathcal{A}\) is a family of subsets of \(X\) that is closed under complementation, then \(X\) belongs to \(\mathcal{A}\) iff \(\emptyset\in\mathcal{A}\)
+    \item If \(\mathcal{A}\) is a family of subsets of \(X\) that is nonempty, closed under complementation, and closed under the formation of finite or countable unions, then \(\mathcal{A}\) must contain \(X\).
+\end{itemize}
+Some examples of \(\sigma\)-algebras are as follows:
+\begin{itemize}
+    \item Let \(X\) be a set, then the powerset of \(X\) is a \(\sigma\)-algebra.
+    \item Let \(X\) be a set, and let \(\mathcal{A}=\{\emptyset, X\}\). Then \(\mathcal{A}\) is a \(\sigma\)-algebra
+    \item Let \(X\) be an infinite set, and let \(\mathcal{A}\) be the collection of all finite subsets of \(X\). Then \(\mathcal{A}\) doees not contain \(X\) and is not closed under complementation; hence it is not an algebra (or a \(\sigma\)-algebra on \(X\).
+\end{itemize}
+
+\textbf{Proposition:} Let \(X\) be a set. Then the intersection of an arbitrary nonempty collection of \(\sigma\)-algebras on \(X\) is a \(\sigma\)-algebra on \(X\).\\
+\textbf{Proof:} Let \(\mathcal{C}\) be a nonempty collection of \(\sigma\)-algebras on \(X\). Now, let \(\mathcal{A}\) be the intersection of the \(\sigma\)-algebras that belong to \(\mathcal{C}\). We just need to check that \(\mathcal{A}\) contains \(X\), is closed under complementation, and is closed under the formation of countable unions. The set \(X\) belongs to \(\mathcal{A}\) since each \(\sigma\) contains \(X\). Now, let \(A\in\mathcal{A}\), each \(\sigma\)-algebra that belongs to \(\mathcal{C}\) contains \(A\) and so also contains \(\mathcal{A}^c\). Finally, we suppose \(\{A_i\}\) is a sequence of sets that belong to \(\mathcal{A}\) and hence to each \(\sigma\)-algebra in \(\mathcal{C}\). Then \(\cup_i A_i\) belongs to each \(\sigma\)-algebra in \(\mathcal{C}\) and so to \(\mathcal{A}\).\\
+
+This proposition then implies the following result which is useful for the construction of \(\sigma\)-algebras:\\
+\textbf{Corollary:} Let \(X\) be a set, and let \(\mathcal{F}\) be a family of subsets of \(X\). Then there is a smallest \(\sigma\)-algebra on \(X\) that includes \(\mathcal{F}\).\\
+This smallest \(\sigma\)-algebra is, as it turns out, unique. The smallest \(\sigma\)-algebra is called the \(\sigma\)-algebra generated by \(\mathcal{F}\) and is denoted by \(\sigma(\mathcal{F})\).\\
+
+\textbf{Proof:} Let \(\mathcal{C}\) be the collection of all \(\sigma\)-algebras on \(X\) that include \(\mathcal{F}\). Then \(\mathcal{C}\) is nonempty, since it contains the \(\sigma\)-algebra that consists of all subsets of \(X\). The intersection of the \(\sigma\)-algebras that belong to \(\mathcal{C}\) is, according to the previous proposition, a \(\sigma-algebra\); it includes \(\mathcal{F}\) and is included in every \(\sigma\)-algebra in \(\mathcal{C}\)- that is, it is included in every \(\sigma\)-algebra in \(X\) that includes \(\mathcal{F}\).\\
+
+The \textit{Borel \(\sigma\)-algebra} on \(\mathbb{R}^d\) is the \(\sigma-algebra\) on \(\mathbb{R}^d\) generated by the collection of open subsets of \(\mathbb{R}^d\); it is denoted by \(\mathcal{B}(\mathbb{R}^d\).
+ \end{document}
